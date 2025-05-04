@@ -118,6 +118,9 @@ export default {
 			},
 			rotate: {
 				'x-180': 'rotateX(180deg)',
+			},
+			perspective: {
+				'1000': '1000px',
 			}
 		}
 	},
@@ -134,6 +137,9 @@ export default {
 				'.rotate-x-180': {
 					'transform': 'rotateX(180deg)',
 				},
+				'.perspective-1000': {
+					'perspective': '1000px',
+				}
 			}
 			addUtilities(newUtilities)
 		}

@@ -79,7 +79,7 @@
   
   /* Flip animation styles */
   .perspective-container {
-    @apply perspective-[1000px];
+    @apply perspective-1000;
   }
   
   .flip-card-inner {
