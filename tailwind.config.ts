@@ -93,6 +93,10 @@ export default {
 				'number-change': {
 					from: { transform: 'translateY(0)' },
 					to: { transform: 'translateY(-100%)' }
+				},
+				'flip': {
+					'0%': { transform: 'rotateX(0)' },
+					'100%': { transform: 'rotateX(180deg)' }
 				}
 			},
 			animation: {
@@ -100,9 +104,38 @@ export default {
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'fade-in': 'fade-in 1s ease-out',
 				'pulse-slow': 'pulse-slow 3s infinite',
-				'number-change': 'number-change 0.5s ease-out'
+				'number-change': 'number-change 0.5s ease-out',
+				'flip': 'flip 0.5s ease-out forwards'
+			},
+			transitionProperty: {
+				'transform-opacity': 'transform, opacity',
+			},
+			transformStyle: {
+				'3d': 'preserve-3d',
+			},
+			backfaceVisibility: {
+				'hidden': 'hidden',
+			},
+			rotate: {
+				'x-180': 'rotateX(180deg)',
 			}
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [
+		require("tailwindcss-animate"),
+		function({ addUtilities }) {
+			const newUtilities = {
+				'.backface-hidden': {
+					'backface-visibility': 'hidden',
+				},
+				'.transform-style-3d': {
+					'transform-style': 'preserve-3d',
+				},
+				'.rotate-x-180': {
+					'transform': 'rotateX(180deg)',
+				},
+			}
+			addUtilities(newUtilities)
+		}
+	],
 } satisfies Config;

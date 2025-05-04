@@ -83,10 +83,23 @@ const CountdownTimer = () => {
       <div className="flex gap-3 md:gap-5">
         {timeLeft.map((unit, index) => (
           <div key={unit.label} className="flex flex-col items-center">
-            <Card className={`countdown-box ${animating[unit.label] ? 'animate-pulse-slow' : ''}`}>
-              <span className="countdown-number">
-                {unit.value.toString().padStart(2, '0')}
-              </span>
+            <Card className="countdown-box relative perspective-[1000px]">
+              {animating[unit.label] ? (
+                <div className="flip-card-container">
+                  <div className="flip-card">
+                    <div className="flip-card-front">
+                      {prevTimeLeft[index].value.toString().padStart(2, '0')}
+                    </div>
+                    <div className="flip-card-back">
+                      {unit.value.toString().padStart(2, '0')}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <span className="countdown-number">
+                  {unit.value.toString().padStart(2, '0')}
+                </span>
+              )}
             </Card>
             <span className="countdown-label">{unit.label}</span>
           </div>
