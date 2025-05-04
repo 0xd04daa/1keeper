@@ -58,7 +58,7 @@
   }
   
   .countdown-box {
-    @apply relative w-16 h-20 md:w-20 md:h-24 bg-accent rounded-lg flex items-center justify-center overflow-hidden;
+    @apply relative w-16 h-20 md:w-20 md:h-24 bg-accent rounded-lg flex items-center justify-center overflow-hidden shadow-lg;
   }
   
   .countdown-number {
@@ -97,6 +97,38 @@
   
   .flip-card-back {
     @apply rotate-x-180;
+  }
+  
+  /* Add top and bottom halves for realistic flip */
+  .flip-card-top {
+    @apply absolute w-full h-1/2 top-0 overflow-hidden border-b border-black/10;
+  }
+  
+  .flip-card-bottom {
+    @apply absolute w-full h-1/2 bottom-0 overflow-hidden border-t border-black/10;
+  }
+  
+  .flip-card-top .countdown-number,
+  .flip-card-bottom .countdown-number {
+    @apply absolute w-full text-center;
+  }
+  
+  .flip-card-top .countdown-number {
+    @apply bottom-0;
+  }
+  
+  .flip-card-bottom .countdown-number {
+    @apply top-0;
+  }
+  
+  /* Add shadow to enhance the 3D effect */
+  .flipping .flip-card-inner:before {
+    content: '';
+    @apply absolute inset-0 z-10 shadow-inner opacity-0 transition-opacity duration-500;
+  }
+  
+  .flipping .flip-card-inner:before {
+    @apply opacity-100;
   }
   
   @keyframes pulse {

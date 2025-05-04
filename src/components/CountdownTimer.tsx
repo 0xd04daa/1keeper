@@ -86,7 +86,7 @@ const CountdownTimer = () => {
       <div className="flex gap-3 md:gap-5">
         {timeLeft.map((unit, index) => (
           <div key={unit.label} className="flex flex-col items-center">
-            <Card className="countdown-box perspective-container">
+            <div className="countdown-box perspective-container">
               <div className={`flip-card-inner ${flipping[unit.label] ? 'flipping' : ''}`}>
                 <div className="flip-card-front">
                   <span className="countdown-number">
@@ -99,7 +99,7 @@ const CountdownTimer = () => {
                   </span>
                 </div>
               </div>
-            </Card>
+            </div>
             <span className="countdown-label">{unit.label}</span>
           </div>
         ))}
