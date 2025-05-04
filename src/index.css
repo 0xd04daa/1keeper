@@ -77,22 +77,22 @@
     animation: pulse 1.5s infinite;
   }
   
-  /* 翻页动画样式 */
-  .perspective-[1000px] {
-    perspective: 1000px;
+  /* Flip animation styles */
+  .perspective-container {
+    @apply perspective-[1000px];
   }
   
-  .flip-card-container {
-    @apply w-full h-full;
+  .flip-card-inner {
+    @apply relative w-full h-full transform-style-3d transition-transform duration-500;
   }
   
-  .flip-card {
-    @apply relative w-full h-full text-center transform-style-3d animate-flip;
+  .flipping .flip-card-inner {
+    @apply rotate-x-180;
   }
   
   .flip-card-front,
   .flip-card-back {
-    @apply absolute w-full h-full flex items-center justify-center text-3xl md:text-4xl font-bold text-white backface-hidden;
+    @apply absolute w-full h-full flex items-center justify-center backface-hidden;
   }
   
   .flip-card-back {
@@ -105,16 +105,6 @@
     }
     50% {
       opacity: 0.5;
-    }
-  }
-  
-  /* 翻页动画关键帧 */
-  @keyframes flip {
-    0% {
-      transform: rotateX(0);
-    }
-    100% {
-      transform: rotateX(180deg);
     }
   }
 }

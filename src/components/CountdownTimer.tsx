@@ -17,7 +17,7 @@ const CountdownTimer = () => {
   ]);
   
   const [prevTimeLeft, setPrevTimeLeft] = useState<CountdownUnit[]>(timeLeft);
-  const [animating, setAnimating] = useState<Record<string, boolean>>({});
+  const [flipping, setFlipping] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     const calculateTimeLeft = () => {
@@ -64,14 +64,17 @@ const CountdownTimer = () => {
     const countdownInterval = setInterval(() => {
       const newTimeLeft = calculateTimeLeft();
       setPrevTimeLeft(timeLeft);
+      
+      // Set flipping state for animation
+      const changes = checkValueChanges(newTimeLeft, timeLeft);
+      setFlipping(changes);
+      
+      // Update time left after a slight delay to allow animation to start
       setTimeLeft(newTimeLeft);
       
-      const changes = checkValueChanges(newTimeLeft, timeLeft);
-      setAnimating(changes);
-      
-      // Reset animation flags after animation completes
+      // Reset flipping state after animation completes
       setTimeout(() => {
-        setAnimating({});
+        setFlipping({});
       }, 500);
     }, 1000);
     
@@ -83,23 +86,19 @@ const CountdownTimer = () => {
       <div className="flex gap-3 md:gap-5">
         {timeLeft.map((unit, index) => (
           <div key={unit.label} className="flex flex-col items-center">
-            <Card className="countdown-box relative perspective-[1000px]">
-              {animating[unit.label] ? (
-                <div className="flip-card-container">
-                  <div className="flip-card">
-                    <div className="flip-card-front">
-                      {prevTimeLeft[index].value.toString().padStart(2, '0')}
-                    </div>
-                    <div className="flip-card-back">
-                      {unit.value.toString().padStart(2, '0')}
-                    </div>
-                  </div>
+            <Card className="countdown-box perspective-container">
+              <div className={`flip-card-inner ${flipping[unit.label] ? 'flipping' : ''}`}>
+                <div className="flip-card-front">
+                  <span className="countdown-number">
+                    {unit.value.toString().padStart(2, '0')}
+                  </span>
                 </div>
-              ) : (
-                <span className="countdown-number">
-                  {unit.value.toString().padStart(2, '0')}
-                </span>
-              )}
+                <div className="flip-card-back">
+                  <span className="countdown-number">
+                    {unit.value.toString().padStart(2, '0')}
+                  </span>
+                </div>
+              </div>
             </Card>
             <span className="countdown-label">{unit.label}</span>
           </div>
