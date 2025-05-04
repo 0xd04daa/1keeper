@@ -4,7 +4,6 @@ import CountdownTimer from "@/components/CountdownTimer";
 import SocialLinks from "@/components/SocialLinks";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import { Separator } from "@/components/ui/separator";
-import KeeperIcon from "@/components/KeeperIcon";
 
 const Index = () => {
   const [mounted, setMounted] = useState(false);
@@ -31,9 +30,8 @@ const Index = () => {
               style={{ width: 'auto' }}
             />
           </div>
-          <h1 className="text-2xl md:text-3xl lg:text-4xl text-white font-semibold mb-3 flex items-center justify-center gap-2">
+          <h1 className="text-2xl md:text-3xl lg:text-4xl text-white font-semibold mb-3">
             The On-Chain Trading Terminal
-            <KeeperIcon className="text-white" size={18} />
           </h1>
         </div>
         
