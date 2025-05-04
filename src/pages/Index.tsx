@@ -22,9 +22,13 @@ const Index = () => {
       
       <div className="max-w-4xl w-full flex flex-col items-center text-center z-10 animate-fade-in">
         <div className="mb-8">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold tracking-tight mb-4 bg-clip-text text-transparent bg-gradient-to-b from-white to-white/70">
-            1Keeper
-          </h1>
+          <div className="flex justify-center mb-4">
+            <img 
+              src="/lovable-uploads/f89a4103-24c3-4e22-a80a-b1a3a4adbebd.png" 
+              alt="1Keeper Logo" 
+              className="h-16 md:h-20 lg:h-24"
+            />
+          </div>
           <p className="text-xl md:text-2xl text-white/70 font-light max-w-2xl">
             A brand new platform coming soon
           </p>
