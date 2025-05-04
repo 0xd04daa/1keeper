@@ -86,50 +86,36 @@ const CountdownTimer = () => {
           <div key={unit.label} className="flex flex-col items-center">
             <div className="countdown-box perspective-container">
               <div className={`flip-card-inner ${flipping[unit.label] ? 'flipping' : ''}`}>
-                {/* Top half (visible before flip) */}
-                <div className="flip-card-top">
-                  <span className="countdown-number">
-                    {unit.value.toString().padStart(2, '0')}
-                  </span>
-                </div>
-                
-                {/* Bottom half (visible before flip) */}
-                <div className="flip-card-bottom">
-                  <span className="countdown-number">
-                    {unit.value.toString().padStart(2, '0')}
-                  </span>
-                </div>
-                
-                {/* Card that flips */}
+                {/* Card front (visible before flip) */}
                 <div className="flip-card-front">
-                  {unit.prevValue !== undefined && flipping[unit.label] ? (
-                    <>
-                      <div className="flip-card-top">
-                        <span className="countdown-number">
-                          {unit.prevValue.toString().padStart(2, '0')}
-                        </span>
-                      </div>
-                      <div className="flip-card-bottom invisible">
-                        <span className="countdown-number">
-                          {unit.prevValue.toString().padStart(2, '0')}
-                        </span>
-                      </div>
-                    </>
-                  ) : (
-                    <span className="countdown-number">
-                      {unit.value.toString().padStart(2, '0')}
-                    </span>
-                  )}
-                </div>
-                
-                {/* Back side of the flipping card */}
-                <div className="flip-card-back">
-                  <div className="flip-card-top invisible">
+                  {/* Top half of the number */}
+                  <div className="flip-card-top rounded-t-lg">
                     <span className="countdown-number">
                       {unit.value.toString().padStart(2, '0')}
                     </span>
                   </div>
-                  <div className="flip-card-bottom">
+                  
+                  {/* Bottom half of the number */}
+                  <div className="flip-card-bottom rounded-b-lg">
+                    <span className="countdown-number">
+                      {unit.value.toString().padStart(2, '0')}
+                    </span>
+                  </div>
+                </div>
+                
+                {/* Card back (visible after flip) */}
+                <div className="flip-card-back">
+                  {/* Top half of the number */}
+                  <div className="flip-card-top rounded-t-lg">
+                    <span className="countdown-number">
+                      {unit.prevValue !== undefined && flipping[unit.label] 
+                        ? unit.prevValue.toString().padStart(2, '0') 
+                        : unit.value.toString().padStart(2, '0')}
+                    </span>
+                  </div>
+                  
+                  {/* Bottom half of the number */}
+                  <div className="flip-card-bottom rounded-b-lg">
                     <span className="countdown-number">
                       {unit.value.toString().padStart(2, '0')}
                     </span>
