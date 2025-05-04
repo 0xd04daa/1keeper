@@ -30,6 +30,9 @@ const Index = () => {
               style={{ width: 'auto' }}
             />
           </div>
+          <h1 className="text-2xl md:text-3xl lg:text-4xl text-white font-semibold mb-3">
+            The On-Chain Trading Terminal
+          </h1>
           <p className="text-xl md:text-2xl text-white/70 font-light max-w-2xl">
             A brand new platform coming soon
           </p>
