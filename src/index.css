@@ -101,11 +101,11 @@
   
   /* Add top and bottom halves for realistic flip */
   .flip-card-top {
-    @apply absolute w-full h-1/2 top-0 overflow-hidden border-b border-black/10;
+    @apply absolute w-full h-1/2 top-0 overflow-hidden border-b border-black/10 bg-accent;
   }
   
   .flip-card-bottom {
-    @apply absolute w-full h-1/2 bottom-0 overflow-hidden border-t border-black/10;
+    @apply absolute w-full h-1/2 bottom-0 overflow-hidden border-t border-black/10 bg-accent;
   }
   
   .flip-card-top .countdown-number,
@@ -129,6 +129,43 @@
   
   .flipping .flip-card-inner:before {
     @apply opacity-100;
+  }
+  
+  /* Add background texture for more realism */
+  .flip-card-top, .flip-card-bottom {
+    position: relative;
+  }
+  
+  .flip-card-top:after, 
+  .flip-card-bottom:after {
+    content: '';
+    @apply absolute inset-0 bg-black/5 pointer-events-none;
+    background-image: linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 100% 4px;
+  }
+  
+  /* Add subtle shadow at the folding edge */
+  .flipping .flip-card-top {
+    @apply shadow-[0_-2px_5px_rgba(0,0,0,0.1)];
+  }
+  
+  .flipping .flip-card-bottom {
+    @apply shadow-[0_2px_5px_rgba(0,0,0,0.1)];
+  }
+  
+  .flip-card-front.flipping {
+    @apply shadow-md;
+  }
+  
+  /* Add animation for the inset shadow when flipping */
+  @keyframes shadowFade {
+    0% { box-shadow: inset 0 0 0 rgba(0,0,0,0); }
+    50% { box-shadow: inset 0 0 20px rgba(0,0,0,0.3); }
+    100% { box-shadow: inset 0 0 0 rgba(0,0,0,0); }
+  }
+  
+  .flipping .flip-card-inner {
+    animation: shadowFade 0.5s ease-out;
   }
   
   @keyframes pulse {
