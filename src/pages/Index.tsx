@@ -24,9 +24,10 @@ const Index = () => {
         <div className="mb-8">
           <div className="flex justify-center mb-4">
             <img 
-              src="/lovable-uploads/f89a4103-24c3-4e22-a80a-b1a3a4adbebd.png" 
+              src="/1keeper-logo.svg" 
               alt="1Keeper Logo" 
               className="h-16 md:h-20 lg:h-24"
+              style={{ width: 'auto' }}
             />
           </div>
           <p className="text-xl md:text-2xl text-white/70 font-light max-w-2xl">
