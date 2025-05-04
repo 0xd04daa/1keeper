@@ -1,5 +1,5 @@
 
-import { Twitter, Discord } from "lucide-react";
+import { Twitter, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const SocialLinks = () => {
@@ -22,7 +22,7 @@ const SocialLinks = () => {
         aria-label="Join our Discord"
       >
         <Button variant="outline" size="icon" className="rounded-full h-12 w-12 border-white/20 bg-secondary hover:bg-muted transition-all duration-300">
-          <Discord className="h-5 w-5 text-white" />
+          <MessageCircle className="h-5 w-5 text-white" />
         </Button>
       </a>
     </div>
