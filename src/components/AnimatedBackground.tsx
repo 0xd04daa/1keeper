@@ -1,9 +1,8 @@
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 
 const AnimatedBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -24,13 +23,6 @@ const AnimatedBackground = () => {
     // Resize on window change
     window.addEventListener('resize', resizeCanvas);
 
-    // Track mouse position
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-
     // Neural network nodes
     class Node {
       x: number;
@@ -39,22 +31,17 @@ const AnimatedBackground = () => {
       vx: number;
       vy: number;
       connections: Node[];
-      originalX: number;
-      originalY: number;
 
       constructor(x: number, y: number, radius: number) {
         this.x = x;
         this.y = y;
-        this.originalX = x;
-        this.originalY = y;
         this.radius = radius;
         this.vx = (Math.random() - 0.5) * 0.3;
         this.vy = (Math.random() - 0.5) * 0.3;
         this.connections = [];
       }
 
-      update(width: number, height: number, mouseX: number, mouseY: number) {
-        // Normal movement
+      update(width: number, height: number) {
         this.x += this.vx;
         this.y += this.vy;
 
@@ -64,31 +51,6 @@ const AnimatedBackground = () => {
         }
         if (this.y <= this.radius || this.y >= height - this.radius) {
           this.vy = -this.vy;
-        }
-
-        // Influence of mouse
-        const mouseDistance = Math.sqrt(
-          Math.pow(mouseX - this.x, 2) + Math.pow(mouseY - this.y, 2)
-        );
-        
-        // Only affect nodes within mouse influence radius
-        const mouseInfluenceRadius = 150;
-        if (mouseDistance < mouseInfluenceRadius) {
-          // Calculate the strength of influence based on distance (closer = stronger)
-          const influenceStrength = 1 - mouseDistance / mouseInfluenceRadius;
-          
-          // Calculate direction from node to mouse
-          const dirX = mouseX - this.x;
-          const dirY = mouseY - this.y;
-          
-          // Normalize direction vector
-          const length = Math.sqrt(dirX * dirX + dirY * dirY) || 1;
-          const normDirX = dirX / length;
-          const normDirY = dirY / length;
-          
-          // Apply attraction force towards mouse
-          this.x += normDirX * influenceStrength * 1.5;
-          this.y += normDirY * influenceStrength * 1.5;
         }
       }
 
@@ -152,7 +114,7 @@ const AnimatedBackground = () => {
 
       // Update and draw nodes
       nodes.forEach(node => {
-        node.update(canvas.width, canvas.height, mousePosition.x, mousePosition.y);
+        node.update(canvas.width, canvas.height);
         node.draw(ctx);
       });
 
@@ -166,9 +128,8 @@ const AnimatedBackground = () => {
     // Cleanup
     return () => {
       window.removeEventListener('resize', resizeCanvas);
-      window.removeEventListener('mousemove', handleMouseMove);
     };
-  }, [mousePosition]);
+  }, []);
 
   return (
     <div className="absolute inset-0 overflow-hidden -z-10">
