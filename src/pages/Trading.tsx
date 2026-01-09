@@ -1,36 +1,34 @@
 import Navbar from "@/components/Navbar";
-import PriceChart from "@/components/PriceChart";
-import TradingPanel from "@/components/TradingPanel";
-import TokenInfo from "@/components/TokenInfo";
-import TrendingTokens from "@/components/TrendingTokens";
-import TradeHistory from "@/components/TradeHistory";
+import FilterTabs from "@/components/FilterTabs";
+import TokenTable from "@/components/TokenTable";
+import { Input } from "@/components/ui/input";
+import { Search, Settings2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const Trading = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
+      <FilterTabs />
 
       <div className="container mx-auto px-4 py-6">
-        {/* Main Trading Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-
-          {/* Left Sidebar - Trending Tokens */}
-          <div className="lg:col-span-3 space-y-6">
-            <TrendingTokens />
+        {/* Search and Filters */}
+        <div className="flex items-center gap-4 mb-6">
+          <div className="relative flex-1 max-w-md">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <Input
+              type="text"
+              placeholder="搜索代币名称或合约地址..."
+              className="pl-10 bg-card border-border"
+            />
           </div>
-
-          {/* Center - Chart & Trade History */}
-          <div className="lg:col-span-6 space-y-6">
-            <PriceChart />
-            <TradeHistory />
-          </div>
-
-          {/* Right Sidebar - Trading Panel & Token Info */}
-          <div className="lg:col-span-3 space-y-6">
-            <TradingPanel />
-            <TokenInfo />
-          </div>
+          <Button variant="outline" size="icon" className="border-border hover:bg-secondary">
+            <Settings2 className="w-4 h-4" />
+          </Button>
         </div>
+
+        {/* Token Table */}
+        <TokenTable />
       </div>
     </div>
   );
